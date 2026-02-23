@@ -1,0 +1,76 @@
+<div>
+    <form [formGroup]="users" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="userName">User Name</label>
+            <input type="text" id="userName" formControlName="userName">
+            <span *ngIf="users.controls['userName'].invalid && userSubmitted">
+                User Name is required
+            </span>
+        </div>
+
+        <div>
+            <label for="userCountry">User Country</label>
+            <input type="text" id="userCountry" formControlName="userCountry">
+            <span *ngIf="users.controls['userCountry'].invalid && userSubmitted">
+                User Country is required
+            </span>
+        </div>
+
+        <!-- Product List
+        <div formArrayName="product">
+            <div *ngFor="let productItem of productModel.controls; let i = index" [formGroupName]="i">
+                <label for="proName-{{i}}">Product Name</label>
+                <input type="text" id="proName-{{i}}" formControlName="proName">
+                <button type="button" (click)="removeProduct(i)">Remove</button>
+            </div>
+        </div> -->
+
+        <div formArrayName="productModel">
+            <div *ngFor="let product of productModel.controls; let i = index" [formGroupName]="i">
+                <label for="proName">Product Name</label>
+                <input type="text" id="proName" formControlName="proName">
+                <button type="button" (click)="removeProduct(i)">Remove</button>
+            </div>
+        </div>
+        
+        <button type="button" (click)="addProduct()">Add Product</button>
+        
+
+        
+
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</div>
+
+<!-- Users List -->
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>User Country</th>
+                <th>Products</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of userList; let i = index">
+                <td>{{ user.userName }}</td>
+                <td>{{ user.userCountry }}</td>
+                <td>
+                    <ul>
+                        <li *ngFor="let productModel of user.product">
+                            {{ productModel.proName }}
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <button type="button" (click)="populateUsers(user)">Update</button>
+                    <button type="button" (click)="deleteUser(user.userId)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

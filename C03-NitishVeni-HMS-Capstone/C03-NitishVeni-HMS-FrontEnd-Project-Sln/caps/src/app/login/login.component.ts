@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
     failedAttempts = 0;
     maxAttempts = 3;
     timeoutDuration = 30 * 60 * 1000;
+    
     isLocked = false;
     remainingAttempts = this.maxAttempts;
     errorMessage: string = '';
